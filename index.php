@@ -10,6 +10,11 @@ if (!empty($_GET['length'])) {
     $password_length = intval($_GET['length']) ? $_GET['length'] : rand(5, 10);
 
     $password = generate_password($password_length);
+    echo $password;
+
+    $_SESSION['password'] = $password;
+    header('Location: ./result.php');
+    die();
 }
 
 ?>
@@ -27,7 +32,7 @@ if (!empty($_GET['length'])) {
     <h1>Password Generator</h1>
     <form method="GET" action="">
         <label for="length">Quanti caratteri?</label>
-        <input name="length" type="number" id="lenght" style="width: 60px">
+        <input name="length" type="number" id="lenght" style=" padding:5px; width: 60px;">
         <input type="submit" value="Genera Password"></input>
     </form>
     <?php
