@@ -1,34 +1,16 @@
 <?php
+require_once __DIR__ . '/generate_pw.php';
+
+session_start();
+
 if (!empty($_GET['length'])) {
-    $password = '';
 
-    $chars = range('a', 'z');
-    $upper_chars = range('A', 'Z');
-    $nums = range('0', '9');
-    $symb = range('!', '/');
+    // validazione intero con operatore ternario, length random tra 5 e 10 in caso di default
 
-    // se unisco tutti in un array:
-    // tot = 26 + 26 + 10 + 20;
-    // prob char = 26/tot;
-    // prob upp = 26/tot;
-    // prob numb = 10/tot;
-    // mentre così ogni char_type ha le stesse prob
+    $password_length = intval($_GET['length']) ? $_GET['length'] : rand(5, 10);
 
-
-    $pass_chars = [
-        $chars,
-        $upper_chars,
-        $nums,
-        $symb
-    ];
-
-    for ($i = 0; $i < $_GET['length']; $i++) {
-        $first_rand = rand(0, 3);
-        $char_type = $pass_chars[$first_rand];
-        $password .= $char_type[rand(0, count($char_type) - 1)];
-    }
+    $password = generate_password($password_length);
 }
-
 
 ?>
 
