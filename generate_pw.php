@@ -22,20 +22,40 @@ function generate_password($pw_length)
         // ,
         // mentre così ogni char_type ha le stesse prob:
 
+        $pass_chars = [];
 
-        $pass_chars = [
-            $chars,
-            $upper_chars,
-            $nums,
-            $symb
-        ];
-
-        for ($i = 0; $i < $pw_length; $i++) {
-            $first_rand = rand(0, 3);
-            $char_type = $pass_chars[$first_rand];
-            $rand_char_type = rand(0, count($char_type) - 1);
-            $password .= $char_type[$rand_char_type];
+        if (!empty($_GET['numbers'])) {
+            $pass_chars[] = $nums;
         }
+
+        if (!empty($_GET['characters'])) {
+            $pass_chars[] = $chars;
+            $pass_chars[] = $upper_chars;
+        }
+        if (!empty($_GET['symbols'])) {
+            $pass_chars[] = $symb;
+        }
+
+        if ($pass_chars != 0) {
+
+            if (!empty($_GET['no_repetitions'])) {
+                while (strlen($password) < $pw_length) {
+                    $first_rand = rand(0, count($pass_chars) - 1);
+                    $char_type = $pass_chars[$first_rand];
+                    $rand_char_type = rand(0, count($char_type) - 1);
+                    if (!str_contains($password, $char_type[$rand_char_type]))
+                        $password .= $char_type[$rand_char_type];
+                }
+            } else {
+                for ($i = 0; $i < $pw_length; $i++) {
+
+                    $first_rand = rand(0, count($pass_chars) - 1);
+                    $char_type = $pass_chars[$first_rand];
+                    $rand_char_type = rand(0, count($char_type) - 1);
+                    $password .= $char_type[$rand_char_type];
+                }
+            }
+        } else return '$pass_chars=0';
     }
 
     return $password;

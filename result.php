@@ -23,6 +23,18 @@ if (empty($_SESSION['password'])) {
         <p>
             pw: <?php echo $_SESSION['password'] ?>
         </p>
+        <p>
+            numbers: <?php echo $_SESSION['numbers'] ?>
+        </p>
+        <p>
+            chars: <?php echo $_SESSION['characters'] ?>
+        </p>
+        <p>
+            symbols: <?php echo $_SESSION['symbols'] ?>
+        </p>
+        <p>
+            No repetitions: <?php echo $_SESSION['no_repetitions'] ?>
+        </p>
     </div>
 </body>
 
