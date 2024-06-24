@@ -24,21 +24,21 @@ function generate_password($pw_length)
 
         $pass_chars = [];
 
-        if (!empty($_GET['numbers'])) {
+        if (!empty($_SESSION['numbers'])) {
             $pass_chars[] = $nums;
         }
 
-        if (!empty($_GET['characters'])) {
+        if (!empty($_SESSION['characters'])) {
             $pass_chars[] = $chars;
             $pass_chars[] = $upper_chars;
         }
-        if (!empty($_GET['symbols'])) {
+        if (!empty($_SESSION['symbols'])) {
             $pass_chars[] = $symb;
         }
 
         if ($pass_chars != 0) {
 
-            if (!empty($_GET['no_repetitions'])) {
+            if (!empty($_SESSION['no_repetitions'])) {
                 while (strlen($password) < $pw_length) {
                     $first_rand = rand(0, count($pass_chars) - 1);
                     $char_type = $pass_chars[$first_rand];

@@ -28,7 +28,6 @@ if ($condition) {
 
 
     header('Location: ./result.php');
-    die();
 } else echo 'Inserire una lunghezza valida e almeno un tipo di carattere';
 
 ?>
